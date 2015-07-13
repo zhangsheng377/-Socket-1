@@ -30,6 +30,7 @@ void C服务器端Dlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(C服务器端Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_START, &C服务器端Dlg::OnBnClickedStart)
 END_MESSAGE_MAP()
 
 
@@ -85,3 +86,9 @@ HCURSOR C服务器端Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void C服务器端Dlg::OnBnClickedStart()
+{
+	// TODO:  在此添加控件通知处理程序代码
+}
