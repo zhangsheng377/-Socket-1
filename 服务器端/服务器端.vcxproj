@@ -103,6 +103,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ListenSocket.h" />
     <ClInclude Include="NewSocket.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -111,6 +112,7 @@
     <ClInclude Include="服务器端Dlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ListenSocket.cpp" />
     <ClCompile Include="NewSocket.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
