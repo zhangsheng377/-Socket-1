@@ -91,4 +91,27 @@ HCURSOR C服务器端Dlg::OnQueryDragIcon()
 void C服务器端Dlg::OnBnClickedStart()
 {
 	// TODO:  在此添加控件通知处理程序代码
+	if (m_srvrSocket.m_hSocket == INVALID_SOCKET)
+	{
+		BOOL bFlag = m_srvrSocket.Create(5088, SOCK_STREAM, FD_ACCEPT);
+		if (!bFlag)
+		{
+			AfxMessageBox(L"Socket创建失败!");
+			m_srvrSocket.Close();
+			PostQuitMessage(0);											//退出窗口
+			return;
+		}
+		GetDlgItem(IDC_START)->EnableWindow(false);
+	}
+	if (!m_srvrSocket.Listen(1))
+	{
+		int nErrorCode = m_srvrSocket.GetLastError();
+		if (nErrorCode != WSAEWOULDBLOCK)
+		{
+			AfxMessageBox(L"Socket错误!");
+			m_srvrSocket.Close();
+			PostQuitMessage(0);
+			return;
+		}
+	}
 }

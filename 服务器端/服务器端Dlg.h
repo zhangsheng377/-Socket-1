@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "ListenSocket.h"
 
 // C服务器端Dlg 对话框
 class C服务器端Dlg : public CDialogEx
@@ -30,4 +31,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedStart();
+
+	CListenSocket m_srvrSocket;
 };

@@ -30,7 +30,7 @@ void CNewSocket::OnSend(int nErrorCode)
 	// TODO:  在此添加专用代码和/或调用基类
 	char my_SendBuffer[4096];
 	memcpy(my_SendBuffer, "服务器转发:", 24);
-	strncat(my_SendBuffer, my_szBuffer, my_nLength);				//复制赋值
+	strncat_s(my_SendBuffer, my_szBuffer, my_nLength);				//复制赋值
 	Send(my_SendBuffer, sizeof(my_SendBuffer));						//发送数据
 	AsyncSelect(FD_READ);											//触发OnReceive()函数
 
