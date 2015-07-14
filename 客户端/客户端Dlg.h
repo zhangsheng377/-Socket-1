@@ -8,6 +8,7 @@
 #include "ClientSocket.h"
 #include "AddrDlg.h"
 
+#include "resource.h"
 
 // C客户端Dlg 对话框
 class C客户端Dlg : public CDialogEx

@@ -28,7 +28,7 @@ void CClientSocket::OnConnect(int nErrorCode)
 		C客户端App *pApp = (C客户端App*)AfxGetApp();
 		C客户端Dlg *pDlg = (C客户端Dlg*)pApp->m_pMainWnd;
 		memcpy(my_szBuffer, "连接到:", 13);
-		strncat(my_szBuffer, pDlg->my_szServerAdr, sizeof(pDlg->my_szServerAdr));
+		strncat_s(my_szBuffer, pDlg->my_szServerAdr, sizeof(pDlg->my_szServerAdr));
 		pDlg->m_MsgR.InsertString(0, LPCTSTR(my_szBuffer));
 		pDlg->GetDlgItem(IDC_SEND)->EnableWindow(true);
 		AsyncSelect(FD_READ);
