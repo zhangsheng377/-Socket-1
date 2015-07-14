@@ -10,5 +10,8 @@ public:
 	BOOL my_bConnected;
 	UINT my_nLength;
 	char my_szBuffer[4096];
+	virtual void OnConnect(int nErrorCode);
+	virtual void OnReceive(int nErrorCode);
+	virtual void OnSend(int nErrorCode);
 };
 

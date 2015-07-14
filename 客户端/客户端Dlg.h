@@ -5,6 +5,9 @@
 #pragma once
 #include "afxwin.h"
 
+#include "ClientSocket.h"
+#include "AddrDlg.h"
+
 
 // C客户端Dlg 对话框
 class C客户端Dlg : public CDialogEx
@@ -24,6 +27,10 @@ public:
 protected:
 	HICON m_hIcon;
 
+	int TryCount;
+	CClientSocket m_ClientSocket;
+	UINT my_szPort;
+
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
@@ -35,4 +42,6 @@ public:
 	afx_msg void OnBnClickedConnect();
 	afx_msg void OnBnClickedSend();
 	afx_msg void OnBnClickedClose();
+
+	char my_szServerAdr[256];
 };
