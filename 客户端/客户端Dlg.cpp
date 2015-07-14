@@ -145,7 +145,7 @@ void C客户端Dlg::OnTimer(UINT_PTR nIDEvent)
 			return;
 		}
 	}
-	m_ClientSocket.Connect(CString(my_szServerAdr), my_szPort);
+	m_ClientSocket.Connect(LPCTSTR(my_szServerAdr), my_szPort);
 	TryCount++;
 	if (TryCount >= 10 || m_ClientSocket.my_bConnected)
 	{
@@ -153,6 +153,7 @@ void C客户端Dlg::OnTimer(UINT_PTR nIDEvent)
 		if (TryCount >= 10)
 		{
 			AfxMessageBox(L"连接失败!");
+			AfxMessageBox(LPCTSTR(my_szServerAdr));
 			GetDlgItem(IDC_CONNECT)->EnableWindow(true);
 		}
 		return;
