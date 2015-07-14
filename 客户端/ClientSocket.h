@@ -6,5 +6,9 @@ class CClientSocket :
 public:
 	CClientSocket();
 	~CClientSocket();
+
+	BOOL my_bConnected;
+	UINT my_nLength;
+	char my_szBuffer[4096];
 };
 
