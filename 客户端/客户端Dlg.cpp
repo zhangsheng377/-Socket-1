@@ -25,11 +25,16 @@ C客户端Dlg::C客户端Dlg(CWnd* pParent /*=NULL*/)
 void C客户端Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_MsgR);
+	DDX_Control(pDX, IDC_EDIT1, m_MsgS);
 }
 
 BEGIN_MESSAGE_MAP(C客户端Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_CONNECT, &C客户端Dlg::OnBnClickedConnect)
+	ON_BN_CLICKED(IDC_SEND, &C客户端Dlg::OnBnClickedSend)
+	ON_BN_CLICKED(IDC_CLOSE, &C客户端Dlg::OnBnClickedClose)
 END_MESSAGE_MAP()
 
 
@@ -85,3 +90,21 @@ HCURSOR C客户端Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void C客户端Dlg::OnBnClickedConnect()
+{
+	// TODO:  在此添加控件通知处理程序代码
+}
+
+
+void C客户端Dlg::OnBnClickedSend()
+{
+	// TODO:  在此添加控件通知处理程序代码
+}
+
+
+void C客户端Dlg::OnBnClickedClose()
+{
+	// TODO:  在此添加控件通知处理程序代码
+}

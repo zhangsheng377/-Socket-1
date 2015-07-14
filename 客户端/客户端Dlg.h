@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxwin.h"
 
 
 // C客户端Dlg 对话框
@@ -28,4 +29,10 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	CListBox m_MsgR;
+	CEdit m_MsgS;
+	afx_msg void OnBnClickedConnect();
+	afx_msg void OnBnClickedSend();
+	afx_msg void OnBnClickedClose();
 };
