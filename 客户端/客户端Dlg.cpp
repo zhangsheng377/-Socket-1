@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(C客户端Dlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CONNECT, &C客户端Dlg::OnBnClickedConnect)
 	ON_BN_CLICKED(IDC_SEND, &C客户端Dlg::OnBnClickedSend)
 	ON_BN_CLICKED(IDC_CLOSE, &C客户端Dlg::OnBnClickedClose)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -95,16 +96,67 @@ HCURSOR C客户端Dlg::OnQueryDragIcon()
 void C客户端Dlg::OnBnClickedConnect()
 {
 	// TODO:  在此添加控件通知处理程序代码
+	m_ClientSocket.ShutDown(2);
+	m_ClientSocket.m_hSocket = INVALID_SOCKET;
+	m_ClientSocket.my_bConnected = FALSE;
+	CAddrDlg m_Dlg;
+	my_szPort = 5088;
+	if (m_Dlg.DoModal() == IDOK && !m_Dlg.my_Addr.IsEmpty())
+	{
+		memcpy(my_szServerAdr, m_Dlg.my_Addr, sizeof(my_szServerAdr));
+		SetTimer(1, 1000, NULL);
+		TryCount = 0;
+	}
+	GetDlgItem(IDC_CONNECT)->EnableWindow(false);
 }
 
 
 void C客户端Dlg::OnBnClickedSend()
 {
 	// TODO:  在此添加控件通知处理程序代码
+	if (m_ClientSocket.my_bConnected)
+	{
+		m_ClientSocket.my_nLength = m_MsgS.GetWindowTextLengthW();
+		m_ClientSocket.AsyncSelect(FD_WRITE);
+		m_MsgS.SetWindowTextW(L"");
+	}
 }
 
 
 void C客户端Dlg::OnBnClickedClose()
 {
 	// TODO:  在此添加控件通知处理程序代码
+	m_ClientSocket.ShutDown(2);
+	EndDialog(0);
+}
+
+
+void C客户端Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO:  在此添加消息处理程序代码和/或调用默认值
+	if (m_ClientSocket.m_hSocket == INVALID_SOCKET)
+	{
+		BOOL bFlag = m_ClientSocket.Create(0, SOCK_STREAM, FD_CONNECT);
+		if (!bFlag)
+		{
+			AfxMessageBox(L"Socket创建错误!");
+			m_ClientSocket.Close();
+			PostQuitMessage(0);
+			return;
+		}
+	}
+	m_ClientSocket.Connect(CString(my_szServerAdr), my_szPort);
+	TryCount++;
+	if (TryCount >= 10 || m_ClientSocket.my_bConnected)
+	{
+		KillTimer(1);
+		if (TryCount >= 10)
+		{
+			AfxMessageBox(L"连接失败!");
+			GetDlgItem(IDC_CONNECT)->EnableWindow(true);
+		}
+		return;
+	}
+
+	CDialogEx::OnTimer(nIDEvent);
 }

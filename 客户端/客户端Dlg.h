@@ -44,4 +44,5 @@ public:
 	afx_msg void OnBnClickedClose();
 
 	char my_szServerAdr[256];
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
