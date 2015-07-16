@@ -46,4 +46,6 @@ public:
 
 	char my_szServerAdr[256];
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
+	CString my_ServerAddr;
 };

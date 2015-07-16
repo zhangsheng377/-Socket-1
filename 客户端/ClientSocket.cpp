@@ -27,9 +27,9 @@ void CClientSocket::OnConnect(int nErrorCode)
 		my_bConnected = TRUE;
 		C客户端App *pApp = (C客户端App*)AfxGetApp();
 		C客户端Dlg *pDlg = (C客户端Dlg*)pApp->m_pMainWnd;
-		memcpy(my_szBuffer, "连接到:", 13);
-		strncat_s(my_szBuffer, pDlg->my_szServerAdr, sizeof(pDlg->my_szServerAdr));
-		pDlg->m_MsgR.InsertString(0, LPCTSTR(my_szBuffer));
+		CString temp = L"连接到:";
+		temp += pDlg->my_ServerAddr;
+		pDlg->m_MsgR.InsertString(0, temp);
 		pDlg->GetDlgItem(IDC_SEND)->EnableWindow(true);
 		AsyncSelect(FD_READ);
 	}
@@ -44,7 +44,9 @@ void CClientSocket::OnReceive(int nErrorCode)
 	my_nLength = Receive(my_szBuffer, sizeof(my_szBuffer));
 	C客户端App *pApp = (C客户端App*)AfxGetApp();
 	C客户端Dlg *pDlg = (C客户端Dlg*)pApp->m_pMainWnd;
-	pDlg->m_MsgR.InsertString(0, LPCTSTR(my_szBuffer));
+	CString temp;
+	temp.Format(L"%s", CString(my_szBuffer));				//一定要把char[]用CString强制转换,否则CString temp里会有乱码
+	pDlg->m_MsgR.InsertString(0, temp);
 	memset(my_szBuffer, 0, sizeof(my_szBuffer));
 
 	CAsyncSocket::OnReceive(nErrorCode);
