@@ -48,4 +48,5 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	CString my_ServerAddr;
+	CString my_SendData;
 };

@@ -56,7 +56,11 @@ void CClientSocket::OnReceive(int nErrorCode)
 void CClientSocket::OnSend(int nErrorCode)
 {
 	// TODO:  在此添加专用代码和/或调用基类
-	Send(my_szBuffer, my_nLength, 0);
+	for (int i = 0;i < my_SendData.GetLength();i++)
+	{
+		my_szBuffer[i] = my_SendData[i];				//CString转成char[]实在没什么好办法,网上的办法转后总会在每个字符之间加一个.(点),不知道怎么回事,所以只好用for了~~但for循环时却没在CString里发现.(点),可能是被mfc的接口给屏蔽了吧~~
+	}
+	Send(my_szBuffer, my_SendData.GetLength(), 0);
 	my_nLength = 0;
 	memset(my_szBuffer, 0, sizeof(my_szBuffer));
 	AsyncSelect(FD_READ);

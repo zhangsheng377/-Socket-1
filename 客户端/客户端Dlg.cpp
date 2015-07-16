@@ -18,6 +18,7 @@
 
 C客户端Dlg::C客户端Dlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(C客户端Dlg::IDD, pParent)
+	, my_SendData(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -27,6 +28,7 @@ void C客户端Dlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_MsgR);
 	DDX_Control(pDX, IDC_EDIT1, m_MsgS);
+	DDX_Text(pDX, IDC_EDIT1, my_SendData);
 }
 
 BEGIN_MESSAGE_MAP(C客户端Dlg, CDialogEx)
@@ -118,7 +120,8 @@ void C客户端Dlg::OnBnClickedSend()
 	// TODO:  在此添加控件通知处理程序代码
 	if (m_ClientSocket.my_bConnected)
 	{
-		m_ClientSocket.my_nLength = m_MsgS.GetWindowTextLengthW();
+		UpdateData(true);
+		m_ClientSocket.my_SendData = my_SendData;
 		m_ClientSocket.AsyncSelect(FD_WRITE);
 		m_MsgS.SetWindowTextW(L"");
 	}
