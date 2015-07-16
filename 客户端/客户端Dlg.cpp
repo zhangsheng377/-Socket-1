@@ -103,8 +103,9 @@ void C客户端Dlg::OnBnClickedConnect()
 	m_ClientSocket.my_bConnected = FALSE;
 	CAddrDlg m_Dlg;
 	my_szPort = 5088;
-	
-	if (m_Dlg.DoModal() == IDOK && !m_Dlg.my_Addr.IsEmpty())
+	int DlgCode = m_Dlg.DoModal();
+	//m_Dlg.UpdateData(false);
+	if ( DlgCode == IDOK && !m_Dlg.my_Addr.IsEmpty())
 	{
 		memcpy(my_szServerAdr, m_Dlg.my_Addr, sizeof(my_szServerAdr));
 		my_ServerAddr = m_Dlg.my_Addr;
@@ -152,7 +153,7 @@ void C客户端Dlg::OnTimer(UINT_PTR nIDEvent)
 	}
 	m_ClientSocket.Connect(my_ServerAddr, my_szPort);
 	TryCount++;
-	if (TryCount >= 10 || m_ClientSocket.my_bConnected==true)
+	if (TryCount >= 10 || m_ClientSocket.my_bConnected==TRUE)
 	{
 		KillTimer(1);
 		if (TryCount >= 10)

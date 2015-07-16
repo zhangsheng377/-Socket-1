@@ -13,7 +13,7 @@ IMPLEMENT_DYNAMIC(CAddrDlg, CDialogEx)
 
 CAddrDlg::CAddrDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CAddrDlg::IDD, pParent)
-	, my_Addr(_T(""))
+	, my_Addr(_T("127.0.0.1"))
 {
 
 }
