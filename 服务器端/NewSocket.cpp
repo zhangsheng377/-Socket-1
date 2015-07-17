@@ -19,6 +19,9 @@ void CNewSocket::OnReceive(int nErrorCode)
 {
 	// TODO:  在此添加专用代码和/或调用基类
 	my_nLength = Receive(my_szBuffer, sizeof(my_szBuffer), 0);		//接收消息
+
+	
+
 	AsyncSelect(FD_WRITE);											//触发OnSend()函数,(转发接收到的消息)
 
 	CAsyncSocket::OnReceive(nErrorCode);
