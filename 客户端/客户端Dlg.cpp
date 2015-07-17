@@ -102,11 +102,12 @@ void C客户端Dlg::OnBnClickedConnect()
 	m_ClientSocket.m_hSocket = INVALID_SOCKET;
 	m_ClientSocket.my_bConnected = FALSE;
 	CAddrDlg m_Dlg;
-	my_szPort = 5088;
 	int DlgCode = m_Dlg.DoModal();
 	//m_Dlg.UpdateData(false);
 	if ( DlgCode == IDOK && !m_Dlg.my_Addr.IsEmpty())
 	{
+		UpdateData(true);
+		my_szPort = m_Dlg.my_ServerPort;
 		memcpy(my_szServerAdr, m_Dlg.my_Addr, sizeof(my_szServerAdr));
 		my_ServerAddr = m_Dlg.my_Addr;
 		SetTimer(1, 1000, NULL);

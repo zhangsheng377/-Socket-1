@@ -21,4 +21,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CString my_Addr;
+	int my_ServerPort;
 };

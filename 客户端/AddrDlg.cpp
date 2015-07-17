@@ -13,7 +13,8 @@ IMPLEMENT_DYNAMIC(CAddrDlg, CDialogEx)
 
 CAddrDlg::CAddrDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CAddrDlg::IDD, pParent)
-	, my_Addr(_T("127.0.0.1"))
+	, my_Addr(_T("zhangsheng377.wicp.net"))
+	, my_ServerPort(32137)
 {
 
 }
@@ -26,6 +27,7 @@ void CAddrDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT1, my_Addr);
+	DDX_Text(pDX, IDC_EDIT2, my_ServerPort);
 }
 
 
